@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quote Generator</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background:
+        linear-gradient(to right, #ff5733, #ff8c33),
+        /* Left side gradient */
+        linear-gradient(to left, #33ff57, #33ffd5),
+        /* Right side gradient */
+        #6d89a5;
+      /* Middle color */
+      background-blend-mode: normal, normal, normal;
+      /* Set blend mode */
+      background-size: 50%, 50%, 100% 100%;
+      /* Set background size */
+      background-position: left, right, center;
+      /* Set background position */
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    footer {
+      background-color: #101011;
+      padding: 20px 0;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .navbar-brand img {
+      width: 40px;
+      height: auto;
+      animation: rotateLogo 2s infinite linear;
+    }
+
+    @keyframes rotateLogo {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container text-center" style="margin-top: -288px;">
+
+    <h1 class="mb-4">Random Quote Generator</h1>
+    <div id="quote-container">
+      <blockquote class="blockquote text-white">
+        <p id="quote-text">Click the button to generate a random quote...</p>
+        <small id="author">--Unknown</small>
+      </blockquote>
+    </div>
+    <button id="generate-btn" class="btn btn-primary mt-4">Generate Quote</button>
+  </div>
+
+  <!-- Bootstrap JS and jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    document.getElementById('generate-btn').addEventListener('click', function () {
+      fetch('https://api.quotable.io/random')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('quote-text').textContent = data.content;
+          document.getElementById('author').textContent = data.author;
+        })
+        .catch(error => console.error('Error fetching quote:', error));
+    });
+  </script>
+
+  <!-- Footer with Navigation Bar -->
+  <footer>
+
+    <div class="container text-center mt-3">
+      <p>
+        <strong>Founder:</strong> Mithlesh Maurya<br>
+        Proud React Developer hailing from Bihar, India.<br>
+        Crafting wonders at A2 TechnoSoft with mastery in React, Node.js, and diverse cutting-edge technologies.<br>
+        Achievements galore in competitive coding! 💻🚀
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>
